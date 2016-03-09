@@ -43,6 +43,13 @@
       var randCanRGBa, randCanRGBb, randCanRGBc;
       var i = 0;
 
+      //animation frame rate vars
+      var fps = 30;
+      var now;
+      var then = Date.now();
+      var interval = 10000/fps;
+      var delta;
+
       init();
       animate();
 
@@ -62,12 +69,20 @@
 
       }//end init()
 
+      //controls animation
       function animate(){
         requestAnimationFrame( animate );
 
-        render();
+        now = Date.now();
+        delta = now - then;
+     
+        if (delta > interval){
+          then = now - (delta % interval);
+          render();
+        }//end if
       }//end animate()
 
+      //where the magic happens
       function render(){
         //canvas dimensions
         var canHeight = canvas.getHeight();
@@ -95,6 +110,7 @@
               hasControls: false,
               selectable: false
             })//end cirCollection instantiation
+
         var circLocationX = (circCollection[i].getWidth() + circCollection[i].getLeft());
 
         var circSubtraction = circCollection[i].getWidth()*2; 
@@ -112,61 +128,7 @@
         i++
       }//end render
 
-
-       
-        //will draw rectangles for grid
-        /*function drawRectangles(startWidth, startHeight){
-
-            var i;
-            var j;
-            for(j = 0; j <= 10; j++){
-
-                 for(i = 0; i <= 15; i++){    
-                    //random number generated for circle's radius
-                    var randRadius = fabric.util.getRandomInt(1,10);
-                    var randRGBa = fabric.util.getRandomInt(0,255);
-                    var randRGBb = fabric.util.getRandomInt(0,255);
-                    var randRGBc = fabric.util.getRandomInt(0,255);
-
-                    var randTop = fabric.util.getRandomInt(20, (canHeight-40));
-                    var randLeft = fabric.util.getRandomInt(20, (canWidth-40));
-
-                    var circ+i = new fabric.Circle({
-                          radius: startWidth/randRadius,
-                          top: randTop,
-                          left: randLeft,
-                          fill: 'rgb('+randRGBa+','+randRGBb+','+randRGBc+')',
-                          hasControls: false,
-                          selectable: false
-                        })
-
-                
-                //right edge of circle
-                    var circLocationX = (circ_i.getWidth() + circ_i.getLeft());
-
-                    var circSubtraction = circ_i.getWidth()*2; 
-
-                    if(circLocationX >= canWidth){
-                      circ_i.setLeft(circ_i.getLeft()-circSubtraction);
-                      console.log("circle left 2" + circ_i.getLeft());
-                    }//end if
-
-                    if((circ_i.getHeight() + circ_i.getTop()) >= canvas.getHeight()){
-                      circ_i.setTop(circ_i.getTop()-(circ_i.getRadiusY()-1000));
-                    }//end if
-                    
-                    canvas.add(circ_i);
-
-                    //end circle stuff
-                 }//end i for loop
-             }//end j for loop
-
-        }//end drawRectangles
-
-      drawRectangles(canSectionWidth, canSectionHeight);
-      setInterval(function(){drawRectangles(canSectionWidth, canSectionHeight)}, 500);*/
-
-    });
+    })();
 
     </script>
 </html>
