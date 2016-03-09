@@ -63,78 +63,60 @@
 
        
         //will draw rectangles for grid
-        var drawRectangles = function(startWidth, startHeight){
-           
+        function drawRectangles(startWidth, startHeight){
             var squareX = 0;
             var squareY = 0;
-
-            
 
             var i;
             var j;
             for(j = 0; j <= 10; j++){
 
-                 for(i = 0; i <= 15; i++){
-                        
-                //random number generated for circle's radius
-                var randRadius = fabric.util.getRandomInt(1,10);
-                var randRGBa = fabric.util.getRandomInt(0,255);
-                var randRGBb = fabric.util.getRandomInt(0,255);
-                var randRGBc = fabric.util.getRandomInt(0,255);
+                 for(i = 0; i <= 15; i++){    
+                    //random number generated for circle's radius
+                    var randRadius = fabric.util.getRandomInt(1,10);
+                    var randRGBa = fabric.util.getRandomInt(0,255);
+                    var randRGBb = fabric.util.getRandomInt(0,255);
+                    var randRGBc = fabric.util.getRandomInt(0,255);
 
-                var randTop = fabric.util.getRandomInt(20, (canHeight-40));
-                var randLeft = fabric.util.getRandomInt(20, (canWidth-40));
+                    var randTop = fabric.util.getRandomInt(20, (canHeight-40));
+                    var randLeft = fabric.util.getRandomInt(20, (canWidth-40));
 
-                var circ_i = new fabric.Circle({
-                      radius: startWidth/randRadius,
-                      top: randTop,
-                      left: randLeft,
-                      fill: 'rgb('+randRGBa+','+randRGBb+','+randRGBc+')',
-                      hasControls: false,
-                      selectable: false
-                    })
+                    var circ_i = new fabric.Circle({
+                          radius: startWidth/randRadius,
+                          top: randTop,
+                          left: randLeft,
+                          fill: 'rgb('+randRGBa+','+randRGBb+','+randRGBc+')',
+                          hasControls: false,
+                          selectable: false
+                        })
 
                 
-
                 //right edge of circle
-                var circLocationX = (circ_i.getWidth() + circ_i.getLeft());
+                    var circLocationX = (circ_i.getWidth() + circ_i.getLeft());
 
-                var circSubtraction = circ_i.getWidth()*2; 
+                    var circSubtraction = circ_i.getWidth()*2; 
 
-                if(circLocationX >= canWidth){
-                  circ_i.setLeft(circ_i.getLeft()-circSubtraction);
-                  console.log("circle left 2" + circ_i.getLeft());
-                }//end if
+                    if(circLocationX >= canWidth){
+                      circ_i.setLeft(circ_i.getLeft()-circSubtraction);
+                      console.log("circle left 2" + circ_i.getLeft());
+                    }//end if
 
-                if((circ_i.getHeight() + circ_i.getTop()) >= canvas.getHeight()){
-                  circ_i.setTop(circ_i.getTop()-(circ_i.getRadiusY()-1000));
-                }//end if
-                canvas.add(circ_i);
-                //end circle stuff
+                    if((circ_i.getHeight() + circ_i.getTop()) >= canvas.getHeight()){
+                      circ_i.setTop(circ_i.getTop()-(circ_i.getRadiusY()-1000));
+                    }//end if
+                    
+                    canvas.add(circ_i);
 
+                    //end circle stuff
                  }//end i for loop
-
-                 //console.log("j loop "+squareY);
-                 //end j loop stuff
-
-             
-                //console.log('Radius'+circ_i.getRadiusX + 'top'+ circ_i.getTop)
              }//end j for loop
 
-            
         }//end drawRectangles
 
-
-
-   drawRectangles(squareWidth, squareHeight);
-
-        
-
-
+      drawRectangles(squareWidth, squareHeight);
+      setInterval(function(){drawRectangles(squareWidth, squareHeight)}, 500);
 
     });
 
     </script>
-  
-
 </html>
