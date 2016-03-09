@@ -36,22 +36,39 @@
 
     <script>
     $(function () {
-        //window Height and Width
-        var windowHeight = window.innerHeight;    
-        var windowWidth = window.innerWidth;
 
-        var randCanRGBa = fabric.util.getRandomInt(130,190);
-        var randCanRGBb = fabric.util.getRandomInt(130,190);
-        var randCanRGBc = fabric.util.getRandomInt(130,190);
+      var windowHeight = window.innerHeight;    
+      var windowWidth = window.innerWidth;
+      var canvas;
+      var randCanRGBa, randCanRGBb, randCanRGBc;
 
-        var canvas = new fabric.Canvas('canvas',
-            {
-              backgroundColor: 'rgb('+randCanRGBa+','+randCanRGBb+','+randCanRGBc+')'
-            });
+      function init(){
+        randCanRGBa = fabric.util.getRandomInt(130,190);
+        randCanRGBb = fabric.util.getRandomInt(130,190);
+        randCanRGBc = fabric.util.getRandomInt(130,190);
+
+        canvas = new fabric.Canvas('canvas',
+          {
+            backgroundColor: 'rgb('+randCanRGBa+','+randCanRGBb+','+randCanRGBc+')'
+          });
 
         //set canvas dimensions based on window dimensions
         canvas.setHeight(windowHeight);
         canvas.setWidth(windowWidth);
+        
+      }//end init()
+
+      function animate(){
+
+      }//end animate()
+
+      function render(){
+
+      }//end render
+
+
+
+       
 
         //canvas dimensions
         var canHeight = canvas.getHeight();
