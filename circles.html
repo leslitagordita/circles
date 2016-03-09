@@ -41,6 +41,10 @@
       var windowWidth = window.innerWidth;
       var canvas;
       var randCanRGBa, randCanRGBb, randCanRGBc;
+      var i = 0;
+
+      init();
+      animate();
 
       function init(){
         randCanRGBa = fabric.util.getRandomInt(130,190);
@@ -55,34 +59,63 @@
         //set canvas dimensions based on window dimensions
         canvas.setHeight(windowHeight);
         canvas.setWidth(windowWidth);
-        
+
       }//end init()
 
       function animate(){
+        requestAnimationFrame( animate );
 
+        render();
       }//end animate()
 
       function render(){
-
-      }//end render
-
-
-
-       
-
         //canvas dimensions
         var canHeight = canvas.getHeight();
         var canWidth = canvas.getWidth();
 
         //calculate dimensions for each square based on 4x4 grid
-        var squareWidth = canWidth / 4;
-        var squareHeight = canHeight /4;
+        var canSectionWidth = canWidth / 4;
+        var canSectionHeight = canHeight /4;
+
+        var randRadius = fabric.util.getRandomInt(1,10);
+        var randRGBa = fabric.util.getRandomInt(0,255);
+        var randRGBb = fabric.util.getRandomInt(0,255);
+        var randRGBc = fabric.util.getRandomInt(0,255);
+
+        var randTop = fabric.util.getRandomInt(20, (canHeight-40));
+        var randLeft = fabric.util.getRandomInt(20, (canWidth-40));
+
+        var circCollection = [];
+
+        circCollection[i] = new fabric.Circle({
+              radius: canSectionWidth/randRadius,
+              top: randTop,
+              left: randLeft,
+              fill: 'rgb('+randRGBa+','+randRGBb+','+randRGBc+')',
+              hasControls: false,
+              selectable: false
+            })//end cirCollection instantiation
+        var circLocationX = (circCollection[i].getWidth() + circCollection[i].getLeft());
+
+        var circSubtraction = circCollection[i].getWidth()*2; 
+
+        if(circLocationX >= canWidth){
+          circCollection[i].setLeft(circCollection[i].getLeft()-circSubtraction);
+          console.log("circle left 2" + circCollection[i].getLeft());
+        }//end if
+
+        if((circCollection[i].getHeight() + circCollection[i].getTop()) >= canvas.getHeight()){
+          circCollection[i].setTop(circCollection[i].getTop()-(circCollection[i].getRadiusY()-1000));
+        }//end if
+        
+        canvas.add(circCollection[i]);
+        i++
+      }//end render
+
 
        
         //will draw rectangles for grid
-        function drawRectangles(startWidth, startHeight){
-            var squareX = 0;
-            var squareY = 0;
+        /*function drawRectangles(startWidth, startHeight){
 
             var i;
             var j;
@@ -98,7 +131,7 @@
                     var randTop = fabric.util.getRandomInt(20, (canHeight-40));
                     var randLeft = fabric.util.getRandomInt(20, (canWidth-40));
 
-                    var circ_i = new fabric.Circle({
+                    var circ+i = new fabric.Circle({
                           radius: startWidth/randRadius,
                           top: randTop,
                           left: randLeft,
@@ -130,8 +163,8 @@
 
         }//end drawRectangles
 
-      drawRectangles(squareWidth, squareHeight);
-      setInterval(function(){drawRectangles(squareWidth, squareHeight)}, 500);
+      drawRectangles(canSectionWidth, canSectionHeight);
+      setInterval(function(){drawRectangles(canSectionWidth, canSectionHeight)}, 500);*/
 
     });
 
